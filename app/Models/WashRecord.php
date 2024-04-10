@@ -3,8 +3,7 @@
 namespace App\Models;
 
 use App\Models\Site;
-use App\Models\User;
-use App\Models\Worker;
+use App\Models\Vehicle;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -12,8 +11,14 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 class WashRecord extends Model
 {
     use HasFactory;
+    protected $fillable = [
+        "washed_at","vehicle_id","worker_id","site_id"
+    ];
 
-    protected $fillable = ['customer_car_id','worker_id','site_id'];
+    public function vehicle(): BelongsTo
+    {
+        return $this->belongsTo(Vehicle::class);
+    }
 
     public function worker(): BelongsTo
     {
@@ -23,10 +28,5 @@ class WashRecord extends Model
     public function site(): BelongsTo
     {
         return $this->belongsTo(Site::class);
-    }
-
-    public function user(): BelongsTo
-    {
-        return $this->belongsTo(User::class);
     }
 }

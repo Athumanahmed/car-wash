@@ -13,12 +13,12 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('customer_cars', function (Blueprint $table) {
+        Schema::create('wash_records', function (Blueprint $table) {
             $table->id();
-            $table->string('registration_number');
-            $table->string('owner_name');
-            $table->string('owner_phone');
-            $table->string('type');
+            $table->dateTime('washed_at');
+            $table->foreignId('vehicle_id')->constrained('vehicles')->onDelete('cascade');
+            $table->foreignId('worker_id')->constrained('workers')->onDelete('cascade');
+            $table->foreignId('site_id')->constrained('sites')->onDelete('cascade');
             $table->timestamps();
         });
     }
@@ -30,6 +30,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('customer_cars');
+        Schema::dropIfExists('wash_records');
     }
 };

@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Site;
 use App\Models\User;
 use App\Models\WashRecord;
 use Illuminate\Database\Eloquent\Model;
@@ -12,8 +13,9 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 class Worker extends Model
 {
     use HasFactory;
-
-    protected $fillable = ["name","user_id","site_id"];
+    protected $fillable = [
+        'name','user_id','site_id'
+    ] ;
 
     public function user(): BelongsTo
     {
